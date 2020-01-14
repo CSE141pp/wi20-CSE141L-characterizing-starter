@@ -66,9 +66,9 @@ via ssh, or your own laptop).  See the intro lab for details.
 
 2. The lab for the github classroom assignment for this lab:
 
-* Section A (Monday): https://classroom.github.com/
+* Section A (Monday): https://classroom.github.com/a/S1PAs7SE
 
-* Section B (Wednesday): https://classroom.github.com/
+* Section B (Wednesday): https://classroom.github.com/a/tV9Oz_P4
 
 **Note** Starting early on the lab is a form of cheating.  If you are
   in Section B, don't click on the Section A link.  If you do by
