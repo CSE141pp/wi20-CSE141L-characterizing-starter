@@ -163,7 +163,7 @@ you can the code locally with
 runlab --devel
 ```
 
-Commit the resulting `inst_mix.csv` and `pe.csv` as `turnin/devel-inst_mix.csv` and `turnin/devel-pe.csv`.
+Commit the resulting `inst_mix.csv` and `pe.csv` as `outputs/devel-inst_mix.csv` and `outputs/devel-pe.csv`.
 
 ### Test the Starter Code on the Autograder
 
@@ -240,7 +240,7 @@ no   |-O0     |          |INST_MIX|mnist   |2e+02                |1.73e+09|0.135
 no   |-O0     |          |INST_MIX|emnist  |1.5e+02              |4.79e+09|0.349  |2.38e+09|1.75e+09|2.26e+08|1.87e+08       |
 
 
-Copy and commit `pe.csv` and `inst_mix.csv` to `turnin/baseline-pe.csv` and `turnin/baseline-inst_mix.csv`.
+Copy and commit `pe.csv` and `inst_mix.csv` to `outputs/baseline-pe.csv` and `outputs/baseline-inst_mix.csv`.
 
 ### Enabling the Profiler
 
@@ -486,7 +486,7 @@ Or created a filtered version with
 c++filt < code.s > code-demangled.s
 ```
 
-Commit the resulting code as `turnin/baseline-demangled.s` and open it.
+Commit the resulting code as `outputs/baseline-demangled.s` and open it.
 
 Now searching for `fc_layer_t::activate` will give you:
 
@@ -660,7 +660,7 @@ The analysis of the profiling data and the compiler output suggests that
 
 We can bolster this analysis further by looking at the hardware
 performance counters while our test code is running.  You've already collected
-this data in `turnin/code-baseline-stats.csv`.  Here's an example:
+this data in `outputs/code-baseline-stats.csv`.  Here's an example:
 
 dataset|training_inputs_count|runtime|insts  |mem_ops|branches|uncond_branches|
 -------|---------------------|-------|-------|-------|--------|---------------|
