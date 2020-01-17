@@ -67,10 +67,6 @@ via ssh, or your own laptop).  See the intro lab for details.
 2. The lab for the github classroom assignment for this lab.  Find the
 link on the course home page: https://github.com/CSE141pp/Home/.
 
-**Note** Starting early on the lab is a form of cheating.  If you are
-  in Section B, don't click on the Section A link.  If you do by
-  accident, let us know immediately.
-
 3. A PDF annotator/editor to fill out `worksheet.pdf`.  You'll
 submit this via a *a separate assignment* in Gradescope.  We *will
 not* look at the version in your repo.
@@ -163,7 +159,7 @@ you can the code locally with
 runlab --devel
 ```
 
-Commit the resulting `inst_mix.csv` and `pe.csv` as `outputs/devel-inst_mix.csv` and `outputs/devel-pe.csv`.
+Commit the resulting `inst_mix.csv` and `pe.csv` as `outputs/devel-inst_mix.csv` and `outputs/devel-pe.csv`. You will have to use -f to force adding a .csv file. Please make sure you only add these files.
 
 ### Test the Starter Code on the Autograder
 
@@ -240,7 +236,7 @@ no   |-O0     |          |INST_MIX|mnist   |2e+02                |1.73e+09|0.135
 no   |-O0     |          |INST_MIX|emnist  |1.5e+02              |4.79e+09|0.349  |2.38e+09|1.75e+09|2.26e+08|1.87e+08       |
 
 
-Copy and commit `pe.csv` and `inst_mix.csv` to `outputs/baseline-pe.csv` and `outputs/baseline-inst_mix.csv`.
+Copy and commit `pe.csv` and `inst_mix.csv` to `outputs/baseline-pe.csv` and `outputs/baseline-inst_mix.csv`. You will have to use -f to force adding a .csv file. Please make sure you only add these files.
 
 ### Enabling the Profiler
 
@@ -314,9 +310,9 @@ Unfortunately, there are not obvious ways to improve the performance
 of the frequent, short functions, because they are very simple -- they
 just don't do that much.
 
-Rename `code.prof` to `outputs/baseline.gprof` and commit it.  Copy and commit
+Rename `pe.prof` to `outputs/baseline.gprof` and commit it.  Copy and commit
 `pe.csv` and `inst_mix.csv` to `outputs/baseline-gprof-pe.csv` and
-`outputs/baseline-gprof-inst_mix.csv`.
+`outputs/baseline-gprof-inst_mix.csv`. You will have to use -f to force adding a .csv file. Please make sure you only add these files.
 
 ### Taking a Closer Look at the Code
 
@@ -486,7 +482,7 @@ Or created a filtered version with
 c++filt < code.s > code-demangled.s
 ```
 
-Commit the resulting code as `outputs/baseline-demangled.s` and open it.
+Commit the resulting code as `outputs/baseline-demangled.s` and open it. You will have to use -f to force adding a .s file. Please make sure you only add these files.
 
 Now searching for `fc_layer_t::activate` will give you:
 
@@ -660,12 +656,12 @@ The analysis of the profiling data and the compiler output suggests that
 
 We can bolster this analysis further by looking at the hardware
 performance counters while our test code is running.  You've already collected
-this data in `outputs/code-baseline-stats.csv`.  Here's an example:
+this data in `outputs/baseline-inst_mix.csv`.  Here's an example:
 
-dataset|training_inputs_count|runtime|insts  |mem_ops|branches|uncond_branches|
--------|---------------------|-------|-------|-------|--------|---------------|
-mnist  |2e+03                |1.3    |8.8e+09|6.5e+09|8.4e+08 |6.9e+08        |
-emnist |1.5e+03              |3.4    |2.4e+10|1.7e+10|2.3e+09 |1.9e+09        |
+GPROF|OPTIMIZE|DEVEL_MODE|STATS   |dataset |training_inputs_count|nJ      |runtime|insts   |mem_ops |branches|uncond_branches|
+-----|--------|----------|--------|--------|---------------------|--------|-------|--------|--------|--------|---------------|
+no   |-O0     |          |INST_MIX|mnist   |2e+02                |1.73e+09|0.135  |8.81e+08|6.48e+08|8.38e+07|6.93e+07       |
+no   |-O0     |          |INST_MIX|emnist  |1.5e+02              |4.79e+09|0.349  |2.38e+09|1.75e+09|2.26e+08|1.87e+08       |
 
 For your data (and all the data sets), calculate the percentage
 of total instructions that are memory operations, branches, and unconditional
@@ -717,7 +713,7 @@ Instead, we can just ask the compiler to fix it!
 Set `OPTIMIZE=-O3` and leave `gprof` enabled in `config.env`, commit and resubmit
 to the autograder.
 
-Commit the resulting csv files as `outputs/optimized-gprof-pe.csv` and  `outputs/optimized-gprof-inst_count.csv`.
+Commit the resulting csv files as `outputs/optimized-gprof-pe.csv` and  `outputs/optimized-gprof-inst_mix.csv`. You will have to use -f to force adding a .csv file. Please make sure you only add these files.
 
 Demangle `code.s` and take a look at the inner loop body of the new version of `fc_layer_t::activate`:
 
@@ -760,7 +756,7 @@ So far, we have been running the code with the profiler enabled, but `gprof`
 adds some overhead.  To measure the real performance, disable `gprof` in
 `config.env` and resubmit.
 
-Save the resulting csv file as `outputs/optimized{-pe,-inst_count}.csv`.
+Save the resulting csv file as `outputs/optimized{-pe,-inst_mix}.csv`.
 
 ### Reasoning About Performance
 
@@ -783,19 +779,24 @@ categories.  The necessary information is given in the table above.
 Using your O() expression estimate the runtime for each dataset
 relative to mnist.  For instance:
 
-| dataset  | n    | m   | relative-n     | relative-m |
+| dataset  | m    | n   | relative-m     | relative-n |
 |----------|------|-----|----------------|------------|
 | mnist    | 784  | 10  | 1 = 784/784    | 1 = 10/10  |
 | cifar100 | 3072 | 100 | 3.9 = 3072/784 | 10 = 100/10|
 
 You can then estimate execution time of `cifar100` *relative to*
-`mnist` using the relative valuse.  For instance, if you estimate that
+`mnist` using the relative value.  For instance, if you estimate that
 your hot functions is O(n*m), then the relative execution time for
 `cifar100` is 3.9*10=39.
 
 Follow the instructions in the lab write up to analyze this data.
 
 ### Changing the Clock Rate and Measuring Power
+
+First, we no longer need to use gprof, so lets comment it out.
+```
+#GPROF=yes
+```
 
 If inside `pe.csv` you'll see a `MHz` column.  It shows the clock rate
 your experiments have been running at.  You can control the clock rate
@@ -845,7 +846,7 @@ compute power (in Watts), add this to `CMD_LINE_ARGS` (Why did I add
 You should end up with something in your `config.env` like:
 
 ```
-CMD_LINE_ARGS="--dataset mnist --MHz 900 --stat nJ=rapl:::PACKAGE_ENERGY:PACKAGE0 --calc W=nJ/runtime"
+CMD_LINE_ARGS="--dataset cifar100 --MHz 900 --stat nJ=rapl:::PACKAGE_ENERGY:PACKAGE0 --calc W=nJ/runtime/1e9"
 ```
 
 After you've made all these changes, commit and submit.
@@ -870,7 +871,7 @@ Here's what the fields mean:
 
 Add `--MHz 1000`,  `--MHz 1100`,  up to `--MHz 2000` and rerun.
 
-Commit the resulting `pe.csv` and `outputs/pe-clockrate.csv`
+Combine the resulting `pe.csv` files to `outputs/pe-clockrate.csv` and commit `outputs/pe-clockrate.csv`. You will have to use -f to force adding a .csv file. Please make sure you only add these files.
 
 Load `outputs/pe-clockrate.csv` into a spreadsheet. (**TIP**: The
 easiest thing to do is copy it's contents and paste it into a Google
