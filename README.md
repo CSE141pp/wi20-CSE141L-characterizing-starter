@@ -310,7 +310,7 @@ Unfortunately, there are not obvious ways to improve the performance
 of the frequent, short functions, because they are very simple -- they
 just don't do that much.
 
-Rename `pe.prof` to `outputs/baseline.gprof` and commit it.  Copy and commit
+Rename `pe.gprof` to `outputs/baseline.gprof` and commit it.  Copy and commit
 `pe.csv` and `inst_mix.csv` to `outputs/baseline-gprof-pe.csv` and
 `outputs/baseline-gprof-inst_mix.csv`. You will have to use -f to force adding a .csv file. Please make sure you only add these files.
 
